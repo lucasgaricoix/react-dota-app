@@ -1,32 +1,33 @@
-.App {
+.App, .home {
+  text-align: center;
+}
+.Home {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.table {
+  border-radius: 5px;
+  width: 50%;
+  margin: 0px auto;
+  float: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.avatar-photo {
+  width: 100px;
+  border-radius: 50%
+}
+
+.player {
+  font-size: 15px;
+}
+
+.heroes {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero-list {
+  margin-right: 100px;
 }
