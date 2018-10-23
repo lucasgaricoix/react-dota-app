@@ -14,11 +14,13 @@
 
 .avatar-photo {
   width: 100px;
+  height: 100px;
   border-radius: 50%
 }
 
-.player {
-  font-size: 15px;
+
+.main-heroes {
+  font-weight: 100;
 }
 
 .heroes {

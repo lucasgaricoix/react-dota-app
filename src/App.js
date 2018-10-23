@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import _ from 'lodash'
 import Home from './Home'
 import Header from './Header'
 import Heroes from './Heroes'
-import { Switch, Link, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 class App extends Component {
