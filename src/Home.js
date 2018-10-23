@@ -2,8 +2,8 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 import './App.css';
 import FilteredHeroes from './FilteredHeroes';
-import Moment from 'react-moment';
-//import _ from 'lodash'
+import GameMode from './GameMode'
+import constantgamemode from '../src/constants/ConstantGameMode.json'
 
 class Home extends React.Component {
     constructor () {
@@ -13,7 +13,9 @@ class Home extends React.Component {
             players: { personaname: '', mmr_estimate: '', rank_tier: '', solo_competitive_rank: '', avatar: '' },
             wl: { win: '', lose: ''},
             recentMatches: [],
-            heroes: []
+            heroes: [],
+            constantgamemode: constantgamemode,
+            gameModeInfo: []
         }
     }
 
@@ -47,8 +49,19 @@ class Home extends React.Component {
         .then(results => {
         return results.json()
         }).then((data) => {
-            this.setState ({           
-                recentMatches: data.map((repo) => {                
+            data.map((rep) => {
+                if (rep.skill === 1) {
+                    return this.setState({ skill: 'Normal' })
+                }
+                else if (rep.skill === 2 ) {
+                    return this.setState({ skill: 'High' })
+                }
+                else return this.setState({ skill: 'Very High' })
+            })
+
+
+            this.setState ({
+                recentMatches: data.map((repo) => {                    
                     return {
                         match_id: repo.match_id,
                         radiant_win: repo.radiant_win,
@@ -61,8 +74,7 @@ class Home extends React.Component {
                         xp_per_min: repo.xp_per_min,
                         hero_damage: repo.hero_damage,
                         hero_healing: repo.hero_healing,
-                        hero_id: repo.hero_id,
-                        skill: repo.skill
+                        hero_id: repo.hero_id
                     }
                 })
             })
@@ -82,7 +94,7 @@ class Home extends React.Component {
                     }          
                 })
             })
-        })        
+        })   
     }
 
     render() {        
@@ -103,64 +115,66 @@ class Home extends React.Component {
                 <br/>
 
                 <div>
-                    
+                     
                 </div>
                 
-                <div style={{fontSize: 17}}><p>Recent Matches</p></div>
+                <div style={{fontSize: 17, fontWeight: 'bold'}}><p>Recent Matches</p></div>
                 <div>
                     {this.state.recentMatches.map((repo) => {                        
                         return (
                             <div key={repo.match_id}>
-                            <Table style={{width: 900}} striped bordered condensed hover> 
-                                <thead>
-                                    <tr>
-                                    <th>HERO</th>
-                                    <th >RESULT</th>
-                                    <th >GAME MODE</th>
-                                    <th >DURATION</th>
-                                    <th >GPM</th>
-                                    <th >XPM</th>
-                                    <th >KILL</th>
-                                    <th >DEATHS</th>
-                                    <th >ASSISTS</th>
-                                    </tr>                                
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <FilteredHeroes hero_id={repo} heroes={this.state.heroes} />
-                                        </td>
-                                        <td>
-                                            <div>{repo.radiant_win ? 'Radiant win' : 'Dire win'}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.game_mode}</div>
-                                            <div>{repo.skill}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.duration}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.gold_per_min}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.xp_per_min}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.kills}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.deaths}</div>
-                                        </td>
-                                        <td>
-                                            <div>{repo.assists}</div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </Table>
+                                <Table style={{width: 900}} striped bordered condensed hover> 
+                                    <thead>
+                                        <tr>
+                                        <th>HERO</th>
+                                        <th >RESULT</th>
+                                        <th >GAME MODE</th>
+                                        <th >DURATION</th>
+                                        <th >GPM</th>
+                                        <th >XPM</th>
+                                        <th >KILL</th>
+                                        <th >DEATHS</th>
+                                        <th >ASSISTS</th>
+                                        </tr>                                
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <FilteredHeroes hero_id={repo} heroes={this.state.heroes} />
+                                            </td>
+                                            <td>
+                                                <div style={{width: 75}}>{repo.radiant_win ? 'Radiant win' : 'Dire win'}</div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <GameMode gameid={repo} constant={constantgamemode} />
+                                                </div>
+                                                <div>{this.state.skill}</div>
+                                            </td>
+                                            <td>
+                                                <div>{repo.duration}</div>
+                                            </td>
+                                            <td>
+                                                <div>{repo.gold_per_min}</div>
+                                            </td>
+                                            <td>
+                                                <div>{repo.xp_per_min}</div>
+                                            </td>
+                                            <td>
+                                                <div>{repo.kills}</div>
+                                            </td>
+                                            <td>
+                                                <div>{repo.deaths}</div>
+                                            </td>
+                                            <td>
+                                                <div>{repo.assists}</div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </Table>
                             </div>
-                        ) 
-                    })} 
+                        )
+                    })}
                 </div>
             </div>
         )

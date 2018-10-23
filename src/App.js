@@ -10,13 +10,6 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      account_id: '83952806',
-      players: { personaname: '', mmr_estimate: '', rank_tier: '', solo_competitive_rank: '', avatar: '' },
-      wl: { win: '', lose: ''},
-      recentMatches: [],
-      heroes: [],
-      hero_name: '',
-      heroi: '',
       activeKey: 1
     }
   }
