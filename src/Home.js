@@ -15,7 +15,9 @@ class Home extends React.Component {
             recentMatches: [],
             heroes: [],
             constantgamemode: constantgamemode,
-            gameModeInfo: []
+            gameModeInfo: [],
+
+            isFatching: true
         }
     }
 
@@ -40,7 +42,8 @@ class Home extends React.Component {
             this.setState ({
                 wl: {
                     win: data.win,
-                    lose: data.lose
+                    lose: data.lose,
+                    winRate: parseFloat((data.win / (data.win + data.lose) * 100)).toFixed(2)+"%"
                 }
             })
         })        
@@ -49,6 +52,10 @@ class Home extends React.Component {
         .then(results => {
         return results.json()
         }).then((data) => {
+            this.setState ({
+                recentMatches: data
+            })
+
             data.map((rep) => {
                 if (rep.skill === 1) {
                     return this.setState({ skill: 'Normal' })
@@ -59,53 +66,32 @@ class Home extends React.Component {
                 else return this.setState({ skill: 'Very High' })
             })
 
-
-            this.setState ({
-                recentMatches: data.map((repo) => {                    
-                    return {
-                        match_id: repo.match_id,
-                        radiant_win: repo.radiant_win,
-                        kills: repo.kills,
-                        assists: repo.assists,
-                        deaths: repo.deaths,
-                        duration: repo.duration,
-                        game_mode: repo.game_mode,
-                        gold_per_min: repo.gold_per_min,
-                        xp_per_min: repo.xp_per_min,
-                        hero_damage: repo.hero_damage,
-                        hero_healing: repo.hero_healing,
-                        hero_id: repo.hero_id
-                    }
-                })
-            })
+            
         })       
 
         fetch(`https://api.opendota.com/api/heroStats`) //https://api.opendota.com/apps/dota2/images/heroes/
         .then(results => { return results.json() })
         .then((data) => {
             this.setState({
-                heroes: data.map((repo) => {
-                    return {
-                        id: repo.id,
-                        name: repo.name,
-                        localized_name: repo.localized_name,
-                        img: repo.img,
-                        icon: repo.icon
-                    }          
-                })
+                heroes: data                
             })
-        })   
+        })
     }
 
-    render() {        
+    render() {
+        const {isFatching} = true;
         return (
             <div className='home'>
                 <div className='player'>
-                    <div className='playerInfo' style={{}}>
+                    <div className='playerInfo'>
                         <img alt='Profile avatar' className='avatar-photo' src={this.state.players.avatar} />
-                        <div>Name: {this.state.players.personaname}</div>
+                        <div className='personname' style={{fontWeight: 'bolder', fontSize: 28, }}>{this.state.players.personaname}</div>                    
+                        <div className='wins'><span style={{color: 'black'}}>Wins</span> <div>{this.state.wl.win}</div></div>
+                        <div className='losses'><span style={{color: 'black'}}>Losses</span><div>{this.state.wl.lose}</div></div>
+                        <div className='winrate'><span>Winrate</span>
+                            {!isFatching && <div>{this.state.wl.winRate}</div>}
+                        </div>
                     </div>
-                    <div>Win: {this.state.wl.win} | Lose: {this.state.wl.lose} </div>
                     <div>Estimated MMR: {this.state.players.mmr_estimate}</div>
                     <div>Solo Competitive: {this.state.players.solo_competitive_rank}</div>
                     <div>Rank Tier: {this.state.players.rank_tier}</div>
@@ -118,12 +104,12 @@ class Home extends React.Component {
                      
                 </div>
                 
-                <div style={{fontSize: 17, fontWeight: 'bold'}}><p>Recent Matches</p></div>
+                <div style={{fontSize: 18, fontWeight: 'bold'}}><p>Recent Matches</p></div>
                 <div>
-                    {this.state.recentMatches.map((repo) => {                        
+                    {this.state.recentMatches.map((repo) => {
                         return (
                             <div key={repo.match_id}>
-                                <Table style={{width: 900}} striped bordered condensed hover> 
+                                <Table style={{width: 900}} responsive  > 
                                     <thead>
                                         <tr>
                                         <th>HERO</th>
@@ -135,7 +121,7 @@ class Home extends React.Component {
                                         <th >KILL</th>
                                         <th >DEATHS</th>
                                         <th >ASSISTS</th>
-                                        </tr>                                
+                                        </tr>          
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -143,7 +129,7 @@ class Home extends React.Component {
                                                 <FilteredHeroes hero_id={repo} heroes={this.state.heroes} />
                                             </td>
                                             <td>
-                                                <div style={{width: 75}}>{repo.radiant_win ? 'Radiant win' : 'Dire win'}</div>
+                                                <div>{repo.radiant_win ? 'Radiant win' : 'Dire win'}</div>
                                             </td>
                                             <td>
                                                 <div>
@@ -162,6 +148,11 @@ class Home extends React.Component {
                                             </td>
                                             <td>
                                                 <div>{repo.kills}</div>
+                                                <div className='chart'>
+                                                    <div className='killrate' style={{ width: (repo.kills / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
+                                                    <div className='deathrate' style={{ width: (repo.deaths / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
+                                                    <div className='assistrate' style={{ width: (repo.assists / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div>{repo.deaths}</div>

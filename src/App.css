@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Droid Sans", Ubuntu, Cantarell, "Fira Sans", Helvetica, Arial, sans-serif;
 }
 .Home {
   text-align: center;
@@ -15,7 +16,11 @@
 .avatar-photo {
   width: 100px;
   height: 100px;
-  border-radius: 50%
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  padding: 0px;
+  margin: 0px;
 }
 
 
@@ -32,4 +37,62 @@
 
 .hero-list {
   margin-right: 100px;
+}
+
+.player {
+  color: #222;
+  width: 800px;
+  text-align: center;
+  margin: auto;
+}
+
+.playerInfo {
+  text-align: center;
+  margin: auto;
+}
+
+.personname {
+  display: inline-block;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 15px;
+  padding: 0px !important;
+}
+
+.wins {
+  display: inline-block;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 15px;
+  padding: 0px !important;
+  color: rgb(102, 187, 106);
+}
+
+.losses {
+  display: inline-block;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 15px;
+  padding: 0px !important;
+  color: rgb(255, 76, 76);
+}
+
+.winrate {
+  display: inline-block;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 15px;
+  padding: 0px !important;
+}
+
+.killrate {
+  background-color: #66bb6a;
+}
+
+.deathrate {
+  background-color: rgb(255, 76, 76);
+}
+
+.assistrate {
+  background-color: rgb(124, 153, 168);
 }

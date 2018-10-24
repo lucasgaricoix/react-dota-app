@@ -14,13 +14,17 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({ isFatching: false })
+  }
+
   render() {
     return (
       <div className='App'>
         <Header activeKey={this.state.activeKey} />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/heroes' component={Heroes} />          
+          <Route exact path='/heroes' component={Heroes} />
         </Switch>
       </div>
     );
