@@ -2,6 +2,7 @@
   "name": "react-dota-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://github.com/lucasgaricoix/react-dota-app.git",
   "dependencies": {
     "ajv": "^6.0.0",
     "moment": "^2.22.2",

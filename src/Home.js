@@ -53,7 +53,7 @@ class Home extends React.Component {
         return results.json()
         }).then((data) => {
             this.setState ({
-                recentMatches: data
+                recentMatches: data.sort((a,b) => a.match_id > b.match_id)
             })
 
             data.map((rep) => {
@@ -72,8 +72,8 @@ class Home extends React.Component {
         fetch(`https://api.opendota.com/api/heroStats`) //https://api.opendota.com/apps/dota2/images/heroes/
         .then(results => { return results.json() })
         .then((data) => {
-            this.setState({
-                heroes: data                
+            this.setState({                
+                heroes: data
             })
         })
     }
@@ -92,16 +92,16 @@ class Home extends React.Component {
                             {!isFatching && <div>{this.state.wl.winRate}</div>}
                         </div>
                     </div>
-                    <div>Estimated MMR: {this.state.players.mmr_estimate}</div>
-                    <div>Solo Competitive: {this.state.players.solo_competitive_rank}</div>
-                    <div>Rank Tier: {this.state.players.rank_tier}</div>
+                    <div>Estimated MMR {this.state.players.mmr_estimate}</div>
+                    <div>Solo Competitive {this.state.players.solo_competitive_rank}</div>
+                    <div>Rank Tier {this.state.players.rank_tier}</div>
                     
-                    <div>Profile Url: <a href={this.state.players.profileurl}> {this.state.players.profileurl} </a></div>
+                    <div>Profile Url <a target="_blank" rel="noopener noreferrer" href={this.state.players.profileurl}> {this.state.players.profileurl} </a></div>
                 </div>
                 <br/>
 
                 <div style={{fontSize: 18, fontWeight: 'bold'}}><p>Recent Matches</p></div>
-                <Table style={{width: 900}} responsive  > 
+                <Table style={{width: 900}} responsive hover > 
                     <thead>
                         <tr>
                             <th>HERO</th>
@@ -115,9 +115,9 @@ class Home extends React.Component {
                             <th >ASSISTS</th>
                         </tr>          
                     </thead>
-                    {this.state.recentMatches.map((repo, index) => {
+                    {this.state.recentMatches.map((repo) => {
                         return (                            
-                            <tbody key={index}>
+                            <tbody key={repo.match_id}>
                                 <tr>
                                     <td>
                                         <FilteredHeroes hero_id={repo} heroes={this.state.heroes} />
