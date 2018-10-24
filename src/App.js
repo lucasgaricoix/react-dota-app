@@ -20,8 +20,8 @@ class App extends Component {
         <Header activeKey={this.state.activeKey} />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/heroes' component={Heroes} />  
-        </Switch>        
+          <Route exact path='/heroes' component={Heroes} />          
+        </Switch>
       </div>
     );
   }

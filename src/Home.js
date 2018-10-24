@@ -101,14 +101,14 @@ class Home extends React.Component {
         return (
             <div className='home'>
                 <div className='player'>
-                    <div>
+                    <div className='playerInfo' style={{}}>
                         <img alt='Profile avatar' className='avatar-photo' src={this.state.players.avatar} />
                         <div>Name: {this.state.players.personaname}</div>
                     </div>
                     <div>Win: {this.state.wl.win} | Lose: {this.state.wl.lose} </div>
                     <div>Estimated MMR: {this.state.players.mmr_estimate}</div>
-                    <div>Rank Tier: {this.state.players.rank_tier}</div>
                     <div>Solo Competitive: {this.state.players.solo_competitive_rank}</div>
+                    <div>Rank Tier: {this.state.players.rank_tier}</div>
                     
                     <div>Profile Url: <a href={this.state.players.profileurl}> {this.state.players.profileurl} </a></div>
                 </div>
