@@ -100,73 +100,63 @@ class Home extends React.Component {
                 </div>
                 <br/>
 
-                <div>
-                     
-                </div>
-                
                 <div style={{fontSize: 18, fontWeight: 'bold'}}><p>Recent Matches</p></div>
-                <div>
-                    {this.state.recentMatches.map((repo) => {
-                        return (
-                            <div key={repo.match_id}>
-                                <Table style={{width: 900}} responsive  > 
-                                    <thead>
-                                        <tr>
-                                        <th>HERO</th>
-                                        <th >RESULT</th>
-                                        <th >GAME MODE</th>
-                                        <th >DURATION</th>
-                                        <th >GPM</th>
-                                        <th >XPM</th>
-                                        <th >KILL</th>
-                                        <th >DEATHS</th>
-                                        <th >ASSISTS</th>
-                                        </tr>          
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <FilteredHeroes hero_id={repo} heroes={this.state.heroes} />
-                                            </td>
-                                            <td>
-                                                <div>{repo.radiant_win ? 'Radiant win' : 'Dire win'}</div>
-                                            </td>
-                                            <td>
-                                                <div>
-                                                    <GameMode gameid={repo} constant={constantgamemode} />
-                                                </div>
-                                                <div>{this.state.skill}</div>
-                                            </td>
-                                            <td>
-                                                <div>{repo.duration}</div>
-                                            </td>
-                                            <td>
-                                                <div>{repo.gold_per_min}</div>
-                                            </td>
-                                            <td>
-                                                <div>{repo.xp_per_min}</div>
-                                            </td>
-                                            <td>
-                                                <div>{repo.kills}</div>
-                                                <div className='chart'>
-                                                    <div className='killrate' style={{ width: (repo.kills / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
-                                                    <div className='deathrate' style={{ width: (repo.deaths / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
-                                                    <div className='assistrate' style={{ width: (repo.assists / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div>{repo.deaths}</div>
-                                            </td>
-                                            <td>
-                                                <div>{repo.assists}</div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </div>
+                <Table style={{width: 900}} responsive  > 
+                    <thead>
+                        <tr>
+                            <th>HERO</th>
+                            <th >RESULT</th>
+                            <th >GAME MODE</th>
+                            <th >DURATION</th>
+                            <th >GPM</th>
+                            <th >XPM</th>
+                            <th >KILL</th>
+                            <th >DEATHS</th>
+                            <th >ASSISTS</th>
+                        </tr>          
+                    </thead>
+                    {this.state.recentMatches.map((repo, index) => {
+                        return (                            
+                            <tbody key={index}>
+                                <tr>
+                                    <td>
+                                        <FilteredHeroes hero_id={repo} heroes={this.state.heroes} />
+                                    </td>
+                                    <td>
+                                        <div>{repo.radiant_win ? 'Radiant win' : 'Dire win'}</div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <GameMode gameid={repo} constant={constantgamemode} />
+                                        </div>
+                                        <div>{this.state.skill}</div>
+                                    </td>
+                                    <td>
+                                        <div>{repo.duration}</div>
+                                    </td>
+                                    <td>
+                                        <div>{repo.gold_per_min}</div>
+                                    </td>
+                                    <td>
+                                        <div>{repo.xp_per_min}</div>
+                                    </td>
+                                    <td>
+                                        <div>{repo.kills}</div>
+                                        <div className='killrate' style={{ width: (repo.kills / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
+                                        <div className='deathrate' style={{ width: (repo.deaths / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
+                                        <div className='assistrate' style={{ width: (repo.assists / (repo.kills + repo.deaths + repo.assists)*100)+'%'}}> </div>
+                                    </td>
+                                    <td>
+                                        <div>{repo.deaths}</div>
+                                    </td>
+                                    <td>
+                                        <div>{repo.assists}</div>
+                                    </td>
+                                </tr>
+                            </tbody>                         
                         )
                     })}
-                </div>
+                </Table>
             </div>
         )
     }    
