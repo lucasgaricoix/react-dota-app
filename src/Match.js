@@ -23,11 +23,14 @@ class MatchHistory extends React.Component {
       gameModeInfo: [],
       isFatching: true
     }
+    
   }
+  
 
-  componentWillMount () {
-
-    fetch(`https://api.opendota.com/api/players/${this.props.account_id}`)
+  componentDidMount() {
+    
+    const account_id = this.props.match.params.id
+    fetch(`https://api.opendota.com/api/players/${account_id}`)
       .then(results => {
         return results.json()
       })
@@ -45,7 +48,7 @@ class MatchHistory extends React.Component {
       })
       .catch(error => this.setState({ error }))
 
-    fetch(`https://api.opendota.com/api/players/${this.props.account_id}/wl`)
+    fetch(`https://api.opendota.com/api/players/${account_id}/wl`)
       .then(results => {
         return results.json()
       })
@@ -62,14 +65,14 @@ class MatchHistory extends React.Component {
       })
 
     fetch(
-      `https://api.opendota.com/api/players/${this.props.account_id}/recentMatches`
+      `https://api.opendota.com/api/players/${account_id}/recentMatches`
     )
       .then(results => {
         return results.json()
       })
       .then(data => {
         this.setState({
-          recentMatches: data.sort((a, b) => a.match_id > b.match_id)
+          recentMatches: data //.sort((a, b) => a.match_id > b.match_id)
         })
 
         data.map(rep => {
@@ -94,6 +97,7 @@ class MatchHistory extends React.Component {
 
   render () {
     const { isFatching } = true;
+    
     return (
       <div className='home'>
         <div className='player'>

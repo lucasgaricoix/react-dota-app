@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css'
 import MatchHistory from './Match'
-import Header from './Header'
+import Header from './Header.js'
 import Heroes from './Heroes'
 import Login from './Login.jsx'
 import { Switch, Route } from 'react-router-dom'
@@ -22,7 +22,7 @@ class App extends Component {
       wl: { win: '', lose: '' },
       recentMatches: [],
       heroes: [],
-      account_id: '83952806'
+      currentID: undefined
     }
   }
 
@@ -38,31 +38,46 @@ class App extends Component {
         this.state.history.push('/')
       }
     )
+  }  
+
+  onChangeSearchText = (event) => {
+    this.setState({ text: event.target.value })
   }
 
+
+  handleSelect(selectedKey) {
+    this.setState({activeKey: selectedKey});
+  } 
+
+
   render () {
-    const { isLoggedIn } = this.state
+    const { isLoggedIn, account_id } = this.state
     return (
       <div className='App'>
         <Header
           isLoggedIn={isLoggedIn}
           onLogin={this.onLogin}
           onLogout={this.onLogout}
+          hero_id={this.hero_id}          
+          onChangeSearchText={this.onChangeSearchText}
+          text={this.state.text}
+          handleSelect={this.handleSelect}
+          activeKey={this.state.activeKey}
         />
         <Switch>
           <Route exact path='/'  render={props => (
               <Login {...props} 
-                account_id={this.state.account_id}
-                onLogin={this.onLogin}              
+                account_id={account_id}
+                onLogin={this.onLogin}
               />
             )}/>
           <Route
-            path='/match' exact
+            path='/match/:id'
             render={props => (
               <MatchHistory
                 {...props}
                 isLoggedIn={isLoggedIn}
-                account_id={this.state.account_id}
+                account_id={account_id}
                 players={this.state.players}
                 wl={this.state.wl}
                 recentMatches={this.state.recentMatches}
@@ -72,9 +87,9 @@ class App extends Component {
             )}
           />
           <Route
-            path='/heroes' exact
+            path='/heroes'
             render={props => (
-              <Heroes {...props} account_id={this.state.account_id} />
+              <Heroes {...props} account_id={account_id} />
             )}
           />
         </Switch>

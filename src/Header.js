@@ -1,7 +1,8 @@
 import React from 'react'
-import { Navbar, NavItem, Nav, Button } from 'react-bootstrap'
+import { Navbar, NavItem, Nav, Button, FormControl, FormGroup } from 'react-bootstrap'
 
-const Header = ({ isLoggedIn, onLogin, onLogout }) => {
+const Header = ({ onChangeSearchText, text, activeKey, handleSelect }) => {
+  
   return (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
@@ -11,11 +12,17 @@ const Header = ({ isLoggedIn, onLogin, onLogout }) => {
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
-        <Nav>
-          <NavItem eventKey={1} href='/match'>Match </NavItem>
-          <NavItem eventKey={2} href='/heroes'>Heroes </NavItem>
+        <Nav activeKey={1}>
+          <NavItem href={`/heroes`}>Heroes </NavItem>
         </Nav>
-
+       
+        <Navbar.Form pullRight>
+          <FormGroup>
+            <FormControl type="text" placeholder="Search Steam32 ID" value={text} onChange={onChangeSearchText}/>
+          </FormGroup>          
+            <a href={`/match/${text}`}><Button type="submit">My Profile</Button></a>
+        </Navbar.Form>
+        
       </Navbar.Collapse>
     </Navbar>
   )

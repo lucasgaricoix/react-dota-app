@@ -100,16 +100,17 @@
 .login {
   background-image: url('./dota2-background.png');
   position: fixed;
-  left: 0;
   min-width: 100%;
   min-height: 100%;
 }
 
 .welcome {
-  margin-top: 15%;
-  font-size: 122px;
+  margin-bottom: 5%;
+  margin-top: 10%;
+  font-size: 100px;
+  letter-spacing: -5px;
   color: #286090;
   font-weight: 500;
   line-height: 1.2;
-  text-shadow: rgb(0, 0, 0) 1px 0px 3px;
+  text-shadow: rgb(255, 255, 255) 1px 0px 3px;
 }

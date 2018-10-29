@@ -3,7 +3,7 @@ import {
   Button
 } from 'react-bootstrap'
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   return (
     <div className='login'>
       <h1 className='welcome'> {' '}Welcome to Dota Statistcs </h1>
@@ -15,35 +15,10 @@ const Login = ({ onLogin }) => {
           rel='noopener noreferrer'
           style={{marginBottom: 20, fontSize: 25}}
         >
-          <Button bsStyle="primary" style={{marginBottom: 20, borderRadius: 5}} >Get your steam ID</Button>
+          <Button bsStyle="success" bsSize="large" style={{borderRadius: 5}} >Get your steam32 ID</Button>          
         </a>
-      </div>
-
-      <div>
-          <input placeholder='Paste yout SteamID' style={{
-              textAlign: 'center',
-              width: '25%',
-              fontSize: 25,
-              borderRadius: 5,
-              marginBottom: 20
-              }} 
-            />
-      </div>
-
-      <div>
-        <a href='/match'>
-          <Button
-            bsStyle='success'
-            bsSize='large'
-            className='btn-welcome'
-            style={{ height: 50 }}
-            onClick={onLogin}
-          >
-            Start
-          </Button>
-        </a>
-
-      </div>
+        <Button bsStyle="success" bsSize="large" onClick={getGenericID} style={{borderRadius: 5}} >I don't have Steam ID</Button>
+      </div>      
 
     </div>
   )
