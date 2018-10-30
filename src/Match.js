@@ -24,11 +24,9 @@ class MatchHistory extends React.Component {
       isFatching: true
     }
     
-  }
-  
+  }  
 
   componentDidMount() {
-    
     const account_id = this.props.match.params.id
     fetch(`https://api.opendota.com/api/players/${account_id}`)
       .then(results => {
@@ -81,7 +79,9 @@ class MatchHistory extends React.Component {
           } else if (rep.skill === 2) {
             return this.setState({ skill: 'High' })
           } else return this.setState({ skill: 'Very High' })
+         
         })
+        
       })
 
     fetch(`https://api.opendota.com/api/heroStats`) // https://api.opendota.com/apps/dota2/images/heroes/
@@ -179,7 +179,9 @@ class MatchHistory extends React.Component {
                     <div>{this.state.skill}</div>
                   </td>
                   <td>
-                    <div>{repo.duration}</div>
+                    <div>
+                      {Math.floor(repo.duration / 60) + ':' + Math.floor((repo.duration / 60) % 60)}
+                    </div>
                   </td>
                   <td>
                     <div>{repo.gold_per_min}</div>

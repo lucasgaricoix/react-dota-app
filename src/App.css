@@ -105,12 +105,23 @@
 }
 
 .welcome {
-  margin-bottom: 5%;
+  margin-bottom: 30px;
   margin-top: 10%;
   font-size: 100px;
   letter-spacing: -5px;
-  color: #286090;
-  font-weight: 500;
-  line-height: 1.2;
-  text-shadow: rgb(255, 255, 255) 1px 0px 3px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  text-shadow: #000000 5px 0px 3px;
+}
+
+.info {
+  margin: auto;
+  width: 800px;
+  font-size: 25px;
+  letter-spacing: -1px;
+  color: rgb(255, 255, 255);
+  border: solid 1px #ffffff;
+  font-weight: 600;
+  text-shadow: #000000 2px 0px 3px;
+  background-color: rgba(0, 0, 0, 0.6);
 }

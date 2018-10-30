@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Link } from 'react-router-dom'
 import HeroStats from './HeroStats'
 //import ReactTooltip from 'react-tooltip'
 
@@ -7,22 +7,21 @@ class Heroes extends React.Component {
     constructor () {
         super()
         this.state = {
-            heroes: [],
-            heroID: 0
+            heroes: []
         }
     }
     
-    componentWillMount () {
-        fetch(`https://api.opendota.com/api/heroStats`) //https://api.opendota.com/apps/dota2/images/heroes/
+    componentDidMount () {
+        fetch(`https://api.opendota.com/api/heroStats`)
         .then(results => { return results.json() })
         .then((data) => {
-            this.setState({                
+            this.setState({
                 heroes: data
-                })
-            })        
+            })
+        })        
     }
 
-    render () {      
+    render () {
         return (
             <div className='main-heroes'>
                 <div style={{fontSize: 18, fontWeight: 'bold'}}>Heroes</div>
@@ -33,21 +32,17 @@ class Heroes extends React.Component {
                             <div key={index} className='hero-list' >
                                 <div>{repo.localized_name}</div>
                                 <div>
-                                    <a href={`/heroes/${repo.id}`}>                                    
+                                    <Link to={`/heroes/${repo.id}`}>
                                         <img alt='Hero' 
                                             src={`https://api.opendota.com${repo.img}`} 
                                             style={{width: 150}}
                                         />
-                                    </a>                                    
-                                    <Route exact path={`/heroes/${repo.id}`}
-                                        render={props => <HeroStats {...props} id={repo} heroes={this.state.heroes} />} 
-                                    />
+                                    </Link>                                    
                                 </div>
-                                
                             </div>
                         )
                     })}
-                </div>                
+                </div>
             </div>
         )
     }

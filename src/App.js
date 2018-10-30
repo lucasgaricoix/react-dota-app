@@ -6,6 +6,7 @@ import Heroes from './Heroes'
 import Login from './Login.jsx'
 import { Switch, Route } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import HeroStats from './HeroStats';
 
 class App extends Component {
   constructor (props) {
@@ -29,6 +30,8 @@ class App extends Component {
   onLogin = () => {
     this.setState({
       isLoggedIn: true
+    }, () => {
+      this.state.history.push('/')
     })
   }
 
@@ -46,8 +49,12 @@ class App extends Component {
 
 
   handleSelect(selectedKey) {
-    this.setState({activeKey: selectedKey});
+    this.setState({ activeKey: selectedKey });
   } 
+
+  getGenericID = () => {
+    this.setState({ text: '83952806' })
+  }
 
 
   render () {
@@ -66,9 +73,8 @@ class App extends Component {
         />
         <Switch>
           <Route exact path='/'  render={props => (
-              <Login {...props} 
-                account_id={account_id}
-                onLogin={this.onLogin}
+              <Login {...props}
+                getGenericID={this.getGenericID}
               />
             )}/>
           <Route
@@ -87,11 +93,12 @@ class App extends Component {
             )}
           />
           <Route
-            path='/heroes'
+            exact path='/heroes'
             render={props => (
-              <Heroes {...props} account_id={account_id} />
+              <Heroes {...props} account_id={this.state.text} />
             )}
-          />
+          />          
+          <Route exact path='/heroes/:heroid' component={HeroStats} />
         </Switch>
       </div>
     )
