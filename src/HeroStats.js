@@ -27,9 +27,9 @@ class HeroStats extends React.Component {
         return (
             <div >
                 {this.state.heroData.map(                    
-                    (repo => {                            
+                    ((repo, index)=> {                            
                         return (
-                            <div>
+                            <div key={index}>
                                 <img src={`https://api.opendota.com${repo.img}`} alt='hero'/>
                                 <div>{repo.localized_name}</div>
                                 <div>Roles: {repo.roles}</div>

@@ -30,8 +30,6 @@ class App extends Component {
   onLogin = () => {
     this.setState({
       isLoggedIn: true
-    }, () => {
-      this.state.history.push('/')
     })
   }
 

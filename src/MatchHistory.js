@@ -98,7 +98,6 @@ class MatchHistory extends React.Component {
   getTime = (duration) => {
     var minutes = Math.floor(duration / 60);
     var seconds = duration - minutes * 60;
-    console.log(minutes, seconds)
     if (minutes.toString().length === 1 && seconds.toString().length === 1) {
       return '0' + minutes + ':0' + seconds
     }
