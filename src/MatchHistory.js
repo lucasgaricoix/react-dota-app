@@ -70,7 +70,7 @@ class MatchHistory extends React.Component {
       })
       .then(data => {
         this.setState({
-          recentMatches: data //.sort((a, b) => a.match_id > b.match_id)
+          recentMatches: data
         })
 
         data.map(rep => {

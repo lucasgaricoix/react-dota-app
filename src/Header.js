@@ -13,7 +13,7 @@ const Header = ({ onChangeSearchText, text, onLogin }) => {
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
-        <Nav activeKey={2}>
+        <Nav activeKey={1}>
           <NavItem componentClass={Link} to={`/heroes`} href={`/heroes`}>Heroes      
           </NavItem>
         </Nav>
