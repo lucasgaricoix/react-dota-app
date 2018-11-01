@@ -84,7 +84,7 @@ class MatchHistory extends React.Component {
         
       })
 
-    fetch(`https://api.opendota.com/api/heroStats`) // https://api.opendota.com/apps/dota2/images/heroes/
+    fetch(`https://api.opendota.com/api/heroStats`)
       .then(results => {
         return results.json()
       })
@@ -95,9 +95,26 @@ class MatchHistory extends React.Component {
       })
   }
 
+  getTime = (duration) => {
+    var minutes = Math.floor(duration / 60);
+    var seconds = duration - minutes * 60;
+    console.log(minutes, seconds)
+    if (minutes.toString().length === 1 && seconds.toString().length === 1) {
+      return '0' + minutes + ':0' + seconds
+    }
+    else if (minutes.toString().length === 2 && seconds.toString().length === 1) {
+      return minutes + ':0' + seconds
+    }
+    else if (minutes.toString().length === 1 && seconds.toString().length === 2) {
+      return '0' + minutes + ':' + seconds
+    }
+    else {
+      return minutes + ':' + seconds
+    }
+  }
+
   render () {
-    const { isFatching } = true;
-    
+    const { isFatching } = true;    
     return (
       <div className='home'>
         <div className='player'>
@@ -180,7 +197,7 @@ class MatchHistory extends React.Component {
                   </td>
                   <td>
                     <div>
-                      {Math.floor(repo.duration / 60) + ':' + Math.floor((repo.duration / 60) % 60)}
+                      {this.getTime(repo.duration)}
                     </div>
                   </td>
                   <td>

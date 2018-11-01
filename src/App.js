@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import MatchHistory from './Match'
+import MatchHistory from './MatchHistory'
 import Header from './Header.js'
 import Heroes from './Heroes'
 import Login from './Login.jsx'

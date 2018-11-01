@@ -1,7 +1,5 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
-import HeroStats from './HeroStats'
-//import ReactTooltip from 'react-tooltip'
+import { Link } from 'react-router-dom'
 
 class Heroes extends React.Component {
     constructor () {

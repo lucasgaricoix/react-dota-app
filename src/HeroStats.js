@@ -21,12 +21,6 @@ class HeroStats extends React.Component {
                 )
             })
         })
-
-        fetch(`https://api.opendota.com/api/heroes`)
-        .then(results => { return results.json() })
-        .then((data) => {
-            console.log(data)
-        })
     }
     
     render() {        
@@ -60,40 +54,6 @@ class HeroStats extends React.Component {
             </div>
         )
     }
-    
-    
-
-    // fetch(`https://api.opendota.com/api/heroStats`)
-    //   .then(results => {
-    //     return results.json()
-    //   })
-    //   .then(data => {
-    //     this.setState({
-    //       heroes: data
-    //     })
-    //   })
-
-    // const filterHero = this.state.heroes.filter(
-    //     (filterHero) => {
-    //         return filterHero.id === hero_id
-    //     }    
-    // )
-
-    // return (
-    //     <div>
-    //     {filterHero.map(
-    //         (mapHero, index) => {
-    //             return (
-    //                 <div key={index}>
-    //                    <div>
-    //                        {mapHero.localized_name}
-    //                    </div>
-    //                 </div>
-    //             )
-    //         }
-    //     )}
-    //     </div>
-    // )    
 }
 
 export default HeroStats
