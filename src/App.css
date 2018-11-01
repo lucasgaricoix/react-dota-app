@@ -125,3 +125,8 @@
   text-shadow: #000000 2px 0px 3px;
   background-color: rgba(0, 0, 0, 0.6);
 }
+
+
+Table span {
+  font-weight: bold;
+}
