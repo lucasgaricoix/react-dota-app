@@ -1,4 +1,4 @@
-Heroku deployment: https://safe-caverns-24410.herokuapp.com/
+Netlify deployment: https://dota2statistics.netlify.com/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
